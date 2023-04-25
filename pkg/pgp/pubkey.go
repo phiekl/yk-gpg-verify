@@ -76,9 +76,13 @@ func (b *PublicKeyBundle) SigValid() (bool, error) {
 }
 
 // GetExpiryTime returns the public key's expiry time as defined in its signature.
-func (s *PublicKeySet) GetExpiryTime() time.Time {
+func (s *PublicKeySet) GetExpiryTime() *time.Time {
+	if s.Signature.KeyLifetimeSecs == nil {
+		return nil
+	}
 	sec := *(s.Signature.KeyLifetimeSecs)
-	return s.PublicKey.CreationTime.Add(time.Duration(sec) * time.Second)
+	ts := s.PublicKey.CreationTime.Add(time.Duration(sec) * time.Second)
+	return &ts
 }
 
 // GetPublicKeyAlgorithm returns the public key's algorithm type as text.

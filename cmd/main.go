@@ -87,7 +87,7 @@ type resultPublicKey struct {
 	Algorithm   *string     `json:"algorithm"`
 	BitLength   *uint16     `json:"bit_length"`
 	CreateTime  time.Time   `json:"create_time"`
-	ExpiryTime  time.Time   `json:"expiry_time"`
+	ExpiryTime  *time.Time  `json:"expiry_time"`
 	Fingerprint string      `json:"fingerprint"`
 	Matching    interface{} `json:"matching"` // nullable bool
 	Version     int         `json:"version"`
